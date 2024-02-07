@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "cart_count" do %>
+    <i class="fa fa-shopping-cart fa-lg"> (<%= @cart.orderables.count %>)</i>
+<% end %>

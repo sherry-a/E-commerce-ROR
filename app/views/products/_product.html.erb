@@ -1,0 +1,69 @@
+<style>
+    .btn-style{
+        width: 130px;
+        background-color: #194270;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .btn-style:hover{
+        color: white;
+        transition: all 0.3s ease;
+        transform: scale(1.1)
+    }
+
+    .input-feild{
+      width: 50px;
+    }
+</style>
+
+<div id="<%= dom_id product %>">
+
+  <div class="d-flex p-5" style="gap:100px;">
+    <div id="image-container" style="width: 40%; height: 600px;" class="d-flex justify-content-center align-items-start">
+      <% if product.image.content_type.in? (%w[image/jpeg image/png image/jpg]) %>
+        <%= link_to image_tag(product.cover_image), product.image if product.image.attached? %>
+      <% end %>
+    </div> 
+
+    <div class="d-flex flex-column align-items-start justify-content-start" style="width: 40%">
+      <h3 style="font-size: 50px; color: #194270"><%= product.name %></h3>
+
+      <div class="my-4">
+        <h3 style="font-weight: bold; font-size: 30px;">Description</h3>
+        <p><%= product.description %></p>
+      </div>
+
+      <div class="mb-4">
+        <h3 style="font-weight: bold; font-size: 30px;">Category: <span style="color: #194270"><%= product.category %></span></h3>
+      </div>
+
+      <div class="mb-4 d-flex align-items-center justify-content-center">
+        <h3 style="font-weight: bold; font-size: 30px;">Price: Rs. <span style="color: #194270"><%= product.price %></span>/-</h3>
+      </div>
+
+      <% if current_user && current_user.role == 0 %>
+        <div class="d-flex flex-column justify-content-center align-items-start" style="gap: 50px">
+          <%= form_with(url: cart_add_path) do |f| %>
+            <%= f.hidden_field :id, value: product.id %>
+            <div>
+              <h3 style="font-weight: bold; font-size: 25px;">Quantity: <%= f.number_field :quantity, value: 0, min: 1, class: "input-feild" %></h3>
+            </div>
+            <div class="mt-5">
+              <%= f.submit "Add to Cart", class: "btn btn-style" %>
+            </div>
+          <% end %>
+      <% elsif current_user.nil? %>
+        <div class="d-flex flex-column justify-content-center align-items-start" style="gap: 50px">
+            <div>
+              <h3 style="font-weight: bold; font-size: 25px;">Quantity: <input type="number" class="col-md-2" name="input" id="input" value="0" min="1"></h3>
+            </div>
+            <div>
+              <%= link_to "Add to Cart", new_user_session_path, class: "btn btn-style" %>
+            </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>

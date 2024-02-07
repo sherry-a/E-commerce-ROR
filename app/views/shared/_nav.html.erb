@@ -1,0 +1,69 @@
+<nav class="py-4 navbar navbar-expand-lg navbar-dark" style="position: sticky; top: 0px; z-index: 1000; background-color: #194270;">
+  <%= link_to image_tag('logo.png'), root_path %>
+  <%= link_to "abLayJao", root_path, class: "navbar-brand" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to "Home", root_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Products", products_path, class: "nav-link" %>
+      </li>
+      <li>
+        <% if current_user && current_user.role == 1%>
+          <%= link_to "Add Product", new_product_path, class: "nav-link" %>
+        <% end %>
+      </li>
+      <li>
+        <% if current_user && current_user.role == 0%>
+          <%= link_to "My Orders", orders_path, class: "nav-link" %>
+        <% elsif current_user && current_user.role == 1 %>
+          <%= link_to "Orders", show_orders_path, class: "nav-link" %>
+        <% end %>
+      </li>
+      <li>
+        <% if current_user && current_user.role == 1%>
+          <%= link_to "Users", show_users_path, class: "nav-link" %>
+        <% end %>
+      </li>
+    </ul>
+
+    <!-- Search bar -->
+    <form class="form-inline my-2 my-lg-0" method="GET" action="/search">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <!-- Search bar end -->
+
+    <ul class="navbar-nav ml-3">
+        <li class="nav-item">
+            <% if current_user %>
+                <%= link_to ("<i class='fa fa-user-circle-o fa-lg'></i>").html_safe, edit_user_registration_path, class: "nav-link" %>
+            <% else %>
+                <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <% end %>
+        </li>
+        <li class="nav-item">
+            <% if current_user %>
+                <%= link_to "Logout", destroy_user_session_path, 'data-turbo-method': :delete, class: "nav-link" %>
+            <% else %>
+                <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
+            <% end %>
+        </li>
+        <li class="nav-item">
+          <% if current_user && current_user.role == 0 %>
+            <%= link_to cart_path do %>
+              <div class="nav-link">
+                <%= render partial: 'cart/cart_count' %>
+              </div>
+            <% end %>
+          <% end %>
+        </li>
+    </ul>
+
+  </div>
+</nav>

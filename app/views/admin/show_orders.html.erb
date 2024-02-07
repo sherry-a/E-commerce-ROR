@@ -1,0 +1,25 @@
+
+<main class="p-5">
+    <h1 style="font-weight: bold; text-align: center;">Orders</h1>
+
+    <div class="mt-5 d-flex justify-content-center align-items-center flex-wrap" style="gap: 100px">
+        <% @orders.each do |order| %>
+            <div class="p-3 shadow-lg" style="border: 1px solid #194270; border-radius: 10px">
+                <p><strong>Username: </strong><%= order.user.name %></p>
+                <p><strong>Email: </strong><%= order.user.email %></p>
+                <p><strong>Products: </strong><%= order.total_products %></p>
+                <p><strong>Price: </strong>Rs. <%= order.total_price %></p>
+                <p><strong>Placed On: </strong><%= order.created_at %></p>
+                <p><strong>Status: </strong><%= (order.status == 0) ? "Pending" : "Completed" %></p>
+                <%= form_with(url: admin_update_order_path) do |f| %>
+                    <%= f.hidden_field :id, value: order.id %>
+                    <%= f.select :status, ["Choose...", "Pending", "Completed"], {}, {class: "custom-select d-block w-100"} %>
+                    <div class="mt-3 d-flex justify-content-center">
+                        <%= f.submit "Update Order", class: "btn btn-success btn-mini" %>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+
+</main>

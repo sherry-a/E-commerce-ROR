@@ -1,0 +1,112 @@
+<style>
+    .btn-style{
+        background-color: #194270;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .btn-style-2{
+        background-color: #24bdd1;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .btn-style:hover, .btn-style-2:hover{
+        color: white;
+        transition: all 0.3s ease;
+        transform: scale(1.1)
+    }
+</style>
+
+<main>
+
+    <!-- Hero -->
+    <section id="hero-banner" style="background-color: #f0f0f0;">
+        <div class="d-flex justify-content-center py-5">
+            <div class="row mb-4 align-items-center flex-lg-row-reverse">
+                <div class="col-md-6 col-xl-7 mb-4 mb-lg-0 ">
+                    <div class="lc-block position-relative">
+                        <%= image_tag "hero.jpg", height: 500, width: 800 %>
+                    </div>
+                </div><!-- /col -->
+            
+                <div class="col-md-6 col-xl-5">
+                    <div class="lc-block mb-3">
+                        <div editable="rich">
+                            <h2 class="fw-bolder display-2" style="color: #194270; font-weight:bold;">Winter Collection</h2>
+                        </div>
+                    </div><!-- /lc-block -->
+                    <!-- /lc-block -->
+
+
+                    <div class="lc-block mb-4">
+                        <div editable="rich">
+
+                            <p class="lead">Winter Collection 2022 has just arrived. Check it out before its too late!</p>
+
+                        </div>
+                    </div>
+                    <div class="lc-block">
+                        <%= link_to "Shop Now", products_path, class: "btn btn-lg btn-style" %>
+                    </div><!-- /lc-block -->
+                </div><!-- /col -->
+            </div>
+        </div>   
+    </section>
+
+    <section class="d-flex justify-content-center align-items-center my-4" style="gap: 50px;">
+        <div style="background-color: whitesmoke; border-radius: 10px" class="d-flex flex-column justify-content-center align-items-center py-4 px-4 shadow-lg">
+            <%= image_tag("f1.png") %>
+            <h6 class="my-4 px-3 py-2" style="background-color: #fddde4">Free Shipping</h6>
+        </div>
+
+        <div style="background-color: whitesmoke; border-radius: 10px" class="d-flex flex-column justify-content-center align-items-center py-4 px-4 shadow-lg">
+            <%= image_tag("f2.png") %>
+            <h6 class="my-4 px-3 py-2" style="background-color: #cdebbc">Fast Delivery</h6>
+        </div>
+
+        <div style="background-color: whitesmoke; border-radius: 10px" class="d-flex flex-column justify-content-center align-items-center py-4 px-4 shadow-lg">
+            <%= image_tag("f3.png") %>
+            <h6 class="my-4 px-3 py-2" style="background-color: #d1e8f2">Save Money</h6>
+        </div>
+
+    </section>
+
+    <!-- new arrivals -->
+   <section id="new-arrivals" class="p-5">
+        <h2 class="py-3" style="text-align: center; font-weight: bold; font-size: 50px;">New Arrivals</h2>
+        <p style="text-align: center;" class="mb-5">.. we love new stuff, don't you?</p>
+
+        <div id="products" class="d-flex flex-wrap justify-content-center" style="gap: 50px">
+            <% @products.each do |product| %>
+
+            <div style="width: 300px; height: 45vh; border-width: 2px; border-radius: 15px" class="border border-primary d-flex flex-column align-items-center shadow-lg">
+                <div class="d-flex justify-content-center align-items-center" style="height: 60%">
+                <%= image_tag(product.image_as_thumbnail) %>
+                </div>
+                <div class="d-flex flex-column p-2 justify-content-center align-items-center">
+                <p><%= product.name %></p>
+                <h3 style="font-weight: bold; color: #194270">Rs. <%= product.price %></h3>
+                </div>
+                <%= link_to "Show Product", product, class: "btn btn-style" %>
+            </div>
+
+            <% end %>
+        </div>
+    
+   
+   </section>
+
+
+    <section>
+        <div style="width: 100%; height: 400px;" class="bg-image bg-sm-banner d-flex justify-content-center align-items-center flex-column">
+            <h3 style="color: white; font-weight: bold;">Discounted Prices</h3>
+
+            <p style="font-size: 38px; color: white; font-weight: bold">Up to <span style="color: #088178">50% OFF</span> on Clothing and Accessories</p>
+
+            <%= link_to "Explore More", products_path, class: "btn btn-style-2" %>
+
+        </div>
+    </section>
+
+</main>

@@ -1,0 +1,26 @@
+<style>
+    .btn-style{
+        background-color: #194270;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .btn-style:hover{
+        color: white;
+        transition: all 0.3s ease;
+        transform: scale(1.1)
+    }
+</style>
+
+<main class="p-5">
+  <h1 style="font-weight: bold; text-align: center" class="pb-5">Edit Product</h1>
+
+  <%= render "form", product: @product %>
+
+  <br>
+
+  <div>
+    <%= link_to "Back to products", products_path, class: "btn btn-style mr-5" %>
+    <%= link_to "Show this product", @product, class: "btn btn-style" %>
+  </div>
+</main>

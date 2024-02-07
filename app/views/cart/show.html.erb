@@ -1,0 +1,35 @@
+<style>
+    .btn-style-3{
+        background-color: #194270;
+        color: white;
+        transition: all 0.3s ease;
+        width: 180px;
+    }
+
+    .btn-style-2{
+        background-color: #24bdd1;
+        color: white;
+        transition: all 0.3s ease;
+        width: 180px;
+    }
+
+    .btn-style-3:hover, .btn-style-2:hover{
+        color: white;
+        transition: all 0.3s ease;
+        transform: scale(1.1)
+    }
+</style>
+
+
+<% if current_user && current_user.role == 0 %>
+
+    <%= render partial: 'cart/cart' %>
+
+    <%= render partial: 'cart/grand_total' %>
+
+    <div class="d-flex justify-content-center align-items-center mb-5" style="gap: 30px">
+        <%= link_to "Continue Shopping", products_path, class: "btn btn-style-3" %>
+        <%= render partial: "checkout/checkout" %>
+    </div>
+
+<% end %>

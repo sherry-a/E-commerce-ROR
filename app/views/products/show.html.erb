@@ -1,0 +1,43 @@
+<style>
+    .btn-style{
+        background-color: #194270;
+        color: white;
+        transition: all 0.3s ease;
+        width: 180px
+    }
+
+    .btn-style:hover, .btn-edit:hover, .btn-delete:hover{
+        color: white;
+        transition: all 0.3s ease;
+        transform: scale(1.1)
+    }
+
+    .btn-edit{
+      width: 100px;
+      color: white;
+      background-color: #ffd700;
+      transition: all 0.3s ease;
+    }
+
+    .btn-delete{
+      width: 100px;
+      color: white;
+      background-color: #c70039;
+      transition: all 0.3s ease;
+    }
+
+    i{
+      size: 100px
+    }
+</style>
+
+<main class="py-5">
+  <%= render @product %>
+
+  <% if current_user && current_user.role == 1 %>
+    <div class="p-3 d-flex justify-content-end align-items-center" style="width: 100%; gap: 20px">
+      <%= link_to ("<i class='fa fa-edit fa-3x'></i>").html_safe, edit_product_path(@product), class: "btn btn-edit" %>
+      <%= button_to ("<i class='fa fa-trash fa-3x'></i>").html_safe, @product, method: :delete, class: "btn btn-delete" %>
+    </div>
+  <% end %>
+</main>

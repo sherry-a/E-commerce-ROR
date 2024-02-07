@@ -1,0 +1,26 @@
+<% if current_user && current_user.role == 0 %>
+<main class="p-5">
+    <h1 style="font-weight: bold; text-align: center;" class="pb-5">My Orders</h1>
+    <% if current_user.orders.count > 0 %>
+    <div class="d-flex flex-wrap justify-content-center align-items-center" style="gap:100px">
+        <% current_user.orders.each do |order| %>
+            <div class="d-flex flex-column align-items-start justify-content-center p-3 shadow-lg" style="width: 400px; border: 1px solid #194270; border-radius: 15px">
+                <p><strong>Products: </strong><%= order.total_products %></p>
+                <p><strong>Total Price: </strong>Rs. <%= order.total_price %></p>
+                <p><strong>Placed On: </strong><%= order.created_at %></p>
+                <div class="d-flex align-items-center" style="gap: 20px; height: 30px;">             
+                    <h1 class="p-0 m-0" style="font-weight: bold; font-size: 28px">Status:</h1> 
+                    <% if order.status == 0 %>
+                        <p class="text-danger p-0 m-0" style="font-size: 20px">Pending</p>
+                    <% else %>
+                        <p class="text-success p-0 m-0" style="font-size: 20px">Completed</p>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <% else %>
+        <p class="p-5" style="font-size: 20px; text-align:center;">You have not placed any order yet.</p>
+    <% end %>
+</main>
+<% end %>
